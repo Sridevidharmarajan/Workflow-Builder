@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Workflow Builder UI
 
 Frontend Intern Take-Home Assignment: A visual workflow builder application that allows users to create and edit workflows consisting of nodes and connections.
@@ -237,3 +238,6 @@ Potential improvements beyond assignment scope:
 ---
 
 **Built with ❤️ for the Frontend Intern Take-Home Assignment**
+=======
+# Jenkins
+>>>>>>> eb165b5bdbb10096215955cdb1b871a54b0d7563
