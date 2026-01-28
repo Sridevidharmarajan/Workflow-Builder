@@ -1,0 +1,169 @@
+.node {
+  display: inline-block;
+  padding: 12px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  min-width: 180px;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.node:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.node-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  gap: 8px;
+}
+
+.node-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+}
+
+.node-actions {
+  display: flex;
+  gap: 2px;
+}
+
+.add-btn, .edit-btn, .delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 15px;
+  opacity: 0.7;
+  transition: all 0.2s ease;
+  line-height: 1;
+  min-width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-btn:hover, .edit-btn:hover, .delete-btn:hover {
+  opacity: 1;
+  background-color: #f8f9fa;
+}
+
+.add-btn {
+  color: #28a745;
+}
+
+.add-btn:hover {
+  background-color: #d4edda;
+}
+
+.edit-btn {
+  color: #007bff;
+}
+
+.edit-btn:hover {
+  background-color: #cce5ff;
+}
+
+.delete-btn {
+  color: #dc3545;
+}
+
+.delete-btn:hover {
+  background-color: #f8d7da;
+}
+
+.node-type {
+  font-size: 11px;
+  color: #6c757d;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.connection-point {
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.connection-line {
+  width: 2px;
+  height: 8px;
+  background-color: #dee2e6;
+  margin: 0 auto;
+}
+
+/* Node type specific styles */
+.node-start {
+  background-color: #d4edda;
+  border: 2px solid #c3e6cb;
+}
+
+.node-start .node-title {
+  color: #155724;
+}
+
+.node-start .node-type {
+  color: #155724;
+}
+
+.node-action {
+  background-color: #cce5ff;
+  border: 2px solid #b3d7ff;
+}
+
+.node-action .node-title {
+  color: #004085;
+}
+
+.node-action .node-type {
+  color: #004085;
+}
+
+.node-branch {
+  background-color: #fff3cd;
+  border: 2px solid #ffeaa7;
+}
+
+.node-branch .node-title {
+  color: #856404;
+}
+
+.node-branch .node-type {
+  color: #856404;
+}
+
+.node-end {
+  background-color: #f8d7da;
+  border: 2px solid #f5c6cb;
+}
+
+.node-end .node-title {
+  color: #721c24;
+}
+
+.node-end .node-type {
+  color: #721c24;
+}
+
+.node-default {
+  background-color: #e2e3e5;
+  border: 2px solid #d6d8db;
+}
+
+.node-default .node-title {
+  color: #383d41;
+}
+
+.node-default .node-type {
+  color: #383d41;
+}

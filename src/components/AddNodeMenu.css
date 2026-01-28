@@ -1,0 +1,119 @@
+.add-node-menu {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 280px;
+  max-width: 320px;
+}
+
+.add-node-menu h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #333;
+  font-size: 16px;
+}
+
+.node-types {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.node-type-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 8px 10px;
+  border: 2px solid #e9ecef;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.node-type-option:hover {
+  border-color: #007bff;
+  background-color: #f8f9fa;
+}
+
+.node-type-option input[type="radio"] {
+  margin: 0;
+  margin-top: 0;
+}
+
+.type-card {
+  flex: 1;
+}
+
+.type-card h4 {
+  margin: 0;
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.type-card p {
+  margin: 2px 0 0 0;
+  color: #6c757d;
+  font-size: 12px;
+  line-height: 1.3;
+}
+
+.node-type-option input[type="radio"]:checked + .type-card h4 {
+  color: #007bff;
+}
+
+.node-type-option input[type="radio"]:checked {
+  accent-color: #007bff;
+}
+
+.menu-buttons {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.add-btn, .cancel-btn {
+  padding: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+  min-width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.add-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.add-btn:hover:not(:disabled) {
+  background-color: #0056b3;
+}
+
+.add-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.cancel-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: #545b62;
+}
+
+.menu-buttons button:hover {
+  opacity: 0.9;
+}
