@@ -111,6 +111,7 @@ Acknowledgments
 
 React team for the amazing framework
 Vercel for seamless deployment
-Create React App for the projApp setup"
+Create React App for the project App setup"
+
 
 
