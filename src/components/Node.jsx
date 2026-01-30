@@ -17,13 +17,11 @@ const Node = ({ node, onAddNode, onDeleteNode, onEditNode }) => {
     }
   };
 
-  // Strict rules for add button visibility
   const canAddChild = node.type !== 'end';
   const hasChildSlot = node.type === 'action' ? node.children.length === 0 : 
                       node.type === 'branch' ? true : 
                       node.type === 'start' ? true : false;
-  
-  // For branch nodes, we don't show add button here - it's handled in WorkflowCanvas
+
   const showAddButton = canAddChild && hasChildSlot && node.type !== 'branch';
 
   return (
@@ -63,7 +61,7 @@ const Node = ({ node, onAddNode, onDeleteNode, onEditNode }) => {
         {node.type.charAt(0).toUpperCase() + node.type.slice(1)}
       </div>
       
-      {/* Connection indicator - only for nodes that can have outgoing connections */}
+
       {node.type !== 'end' && (
         <div className="connection-point">
           <div className="connection-line"></div>
