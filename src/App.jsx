@@ -3,7 +3,7 @@ import WorkflowCanvas from './components/WorkflowCanvas';
 import AddNodeMenu from './components/AddNodeMenu';
 import './App.css';
 
-// Node Types
+
 const NODE_TYPES = {
   START: 'start',
   ACTION: 'action',
@@ -11,7 +11,7 @@ const NODE_TYPES = {
   END: 'end'
 };
 
-// Initial workflow data
+
 const initialWorkflow = {
   nodes: {
     'start': {
@@ -29,10 +29,10 @@ function App() {
   const [showAddMenu, setShowAddMenu] = useState(null);
   const [editingNode, setEditingNode] = useState(null);
 
-  // Generate unique ID
+
   const generateId = () => `node_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
-  // Utility function to validate node rules
+
   const validateNodeAddition = useCallback((parentId, nodeType, branchName = null) => {
     const parent = workflow.nodes[parentId];
     
@@ -40,17 +40,17 @@ function App() {
       return { valid: false, message: 'Parent node not found' };
     }
     
-    // End nodes cannot have any children
+
     if (parent.type === NODE_TYPES.END) {
       return { valid: false, message: 'End nodes cannot have any children' };
     }
     
-    // Action nodes can have only one child
+
     if (parent.type === NODE_TYPES.ACTION && parent.children.length > 0 && !branchName) {
       return { valid: false, message: 'Action nodes can have only one child' };
     }
     
-    // Branch nodes require adding to a specific branch
+  
     if (parent.type === NODE_TYPES.BRANCH && !branchName) {
       return { valid: false, message: 'Branch nodes require adding to a specific branch (true/false)' };
     }
@@ -58,7 +58,7 @@ function App() {
     return { valid: true, message: '' };
   }, [workflow.nodes]);
 
-  // Add new node with strict validation
+  
   const addNode = useCallback((parentId, nodeType, branchName = null, position = 0) => {
     const validation = validateNodeAddition(parentId, nodeType, branchName);
     
@@ -86,11 +86,11 @@ function App() {
       const parent = { ...newWorkflow.nodes[parentId] };
       
       if (parent.type === NODE_TYPES.BRANCH && branchName) {
-        // Add to specific branch
+       
         parent.branches = { ...parent.branches };
         parent.branches[branchName] = newNodeId;
       } else {
-        // Add to children array
+    
         parent.children = [...parent.children];
         parent.children.splice(position, 0, newNodeId);
       }
@@ -105,7 +105,6 @@ function App() {
     setShowAddMenu(null);
   }, [validateNodeAddition]);
 
-  // Delete node with enhanced continuity logic
   const deleteNode = useCallback((nodeId) => {
     if (nodeId === 'start') {
       alert('Start node cannot be deleted');
@@ -118,7 +117,7 @@ function App() {
       
       if (!nodeToDelete) return prev;
       
-      // Find all parents that reference this node
+
       const parentEntries = Object.entries(newWorkflow.nodes).filter(([id, node]) => {
         if (node.type === NODE_TYPES.BRANCH) {
           return Object.values(node.branches || {}).includes(nodeId);
@@ -126,26 +125,27 @@ function App() {
         return node.children.includes(nodeId);
       });
       
-      // Update each parent to maintain workflow continuity
+  
       parentEntries.forEach(([parentId, parent]) => {
         const updatedParent = { ...parent };
         
         if (parent.type === NODE_TYPES.BRANCH) {
-          // For branch nodes, reconnect to the deleted node's children
+
+          
           updatedParent.branches = { ...updatedParent.branches };
           const branchName = Object.keys(updatedParent.branches).find(
             key => updatedParent.branches[key] === nodeId
           );
           if (branchName) {
-            // Connect branch to the first child of deleted node, or null if no children
+      
             updatedParent.branches[branchName] = nodeToDelete.children[0] || null;
           }
         } else {
-          // For action/start nodes, replace deleted node with its children
+         
           const index = updatedParent.children.indexOf(nodeId);
           if (index > -1) {
             updatedParent.children = [...updatedParent.children];
-            // Remove the deleted node and insert all its children
+          
             updatedParent.children.splice(index, 1, ...nodeToDelete.children);
           }
         }
@@ -153,7 +153,7 @@ function App() {
         newWorkflow.nodes[parentId] = updatedParent;
       });
       
-      // Remove the deleted node
+    
       const { [nodeId]: removed, ...remainingNodes } = newWorkflow.nodes;
       newWorkflow.nodes = remainingNodes;
       
@@ -161,7 +161,6 @@ function App() {
     });
   }, []);
 
-  // Edit node label
   const editNode = useCallback((nodeId, newLabel) => {
     setWorkflow(prev => {
       const newWorkflow = { ...prev };
@@ -174,9 +173,9 @@ function App() {
     setEditingNode(null);
   }, []);
 
-  // Save workflow to console with validation
+  
   const saveWorkflow = useCallback(() => {
-    // Validate workflow before saving
+ 
     const validation = validateWorkflowIntegrity();
     
     if (!validation.valid) {
@@ -206,17 +205,17 @@ function App() {
     alert('Workflow data logged to console! Check browser dev tools (F12).');
   }, [workflow]);
 
-  // Validate workflow integrity
+
   const validateWorkflowIntegrity = useCallback(() => {
     const nodes = workflow.nodes;
     const rootId = workflow.rootId;
     
-    // Check if root exists
+  
     if (!nodes[rootId]) {
       return { valid: false, message: 'Root node not found' };
     }
     
-    // Check for orphaned nodes
+
     const referencedNodes = new Set([rootId]);
     Object.values(nodes).forEach(node => {
       if (node.children) {
@@ -236,9 +235,9 @@ function App() {
       return { valid: false, message: `Orphaned nodes found: ${orphanedNodes.join(', ')}` };
     }
     
-    // Validate node-specific rules
+ 
     for (const [nodeId, node] of Object.entries(nodes)) {
-      // End nodes should have no children
+
       if (node.type === NODE_TYPES.END) {
         if ((node.children && node.children.length > 0) || 
             (node.branches && Object.values(node.branches).some(v => v !== null))) {
@@ -246,7 +245,7 @@ function App() {
         }
       }
       
-      // Action nodes should have at most one child
+    
       if (node.type === NODE_TYPES.ACTION && node.children && node.children.length > 1) {
         return { valid: false, message: `Action node '${nodeId}' has multiple children` };
       }
@@ -255,7 +254,7 @@ function App() {
     return { valid: true, message: 'Workflow is valid' };
   }, [workflow]);
 
-  // Calculate workflow depth
+
   const calculateWorkflowDepth = useCallback(() => {
     const calculateDepth = (nodeId, currentDepth = 0) => {
       const node = workflow.nodes[nodeId];
@@ -316,7 +315,7 @@ function App() {
   );
 }
 
-// Edit Node Modal Component
+
 function EditNodeModal({ nodeId, currentNode, onEditNode, onClose }) {
   const [label, setLabel] = useState(currentNode.label);
 
