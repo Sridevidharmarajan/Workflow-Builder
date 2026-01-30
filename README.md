@@ -1,4 +1,4 @@
-Workflow Builder UI
+"Workflow Builder UI
 
 A React-based workflow builder application that allows users to create, edit, and manage workflow diagrams with different node types and connections.
 
@@ -111,5 +111,6 @@ Acknowledgments
 
 React team for the amazing framework
 Vercel for seamless deployment
-Create React App for the project setup
+Create React App for the projApp setup"
+
 
