@@ -114,7 +114,3 @@ Please contact the repository owner for usage permissions.
 React team for the amazing framework
 Vercel for seamless deployment
 Create React App for project setup
-
-
-
-
